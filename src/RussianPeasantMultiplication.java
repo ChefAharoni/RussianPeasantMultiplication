@@ -22,9 +22,9 @@ public class RussianPeasantMultiplication
             if ((n & 1) == 1) // if odd
                 sum += m;
 
-            m = m << 1; // multiply m by 2
+            m <<= 1; // multiply m by 2
 
-            n = n >> 1; // div n by 2
+            n >>= 1; // div n by 2
         }
 
         return sum;
@@ -38,11 +38,7 @@ public class RussianPeasantMultiplication
         boolean ismNegative = m < 0,
                 isnNegative = n < 0;
 
-        int negatives = 0;
-        if (isnNegative)
-            negatives++;
-        if (ismNegative)
-            negatives++;
+        long sign = ((m < 0) ^ (n < 0)) ? -1 : 1;
 
         m = ismNegative ? m * -1 : m;
         n = isnNegative ? n * -1 : n;
@@ -50,7 +46,6 @@ public class RussianPeasantMultiplication
         long min = Math.min(m, n);
         long max = Math.max(m, n);
 
-        if (min == 1) return max;
         if (max == 0 || min == 0) return 0;
 
         long result = rpMult(max, min);
@@ -58,7 +53,7 @@ public class RussianPeasantMultiplication
         // negatives is 0 --> no negatives
         // negatives is 1 --> there is one negative, multiply result by -1
         // negative is 2 --> return result
-        return negatives == 1 ? result * -1 : result;
+        return sign * result;
     }
 
     private static int parseInt(String s, String varName)
