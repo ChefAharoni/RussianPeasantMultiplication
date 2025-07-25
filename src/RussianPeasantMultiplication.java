@@ -11,21 +11,20 @@ public class RussianPeasantMultiplication
      */
     private static long rpMult(long m, long n)
     {
-        // TODO
         // m is max
         // n is min
-        int flag = 1;
         long sum = 0;
 
         while (n >= 1)
         {
+            // checking the base with bitwise &
+            // even is 0
             if ((n & 1) == 1) // if odd
                 sum += m;
 
-            m = m << 1;
+            m = m << 1; // multiply m by 2
 
             n = n >> 1; // div n by 2
-            flag++;
         }
 
         return sum;
@@ -55,10 +54,10 @@ public class RussianPeasantMultiplication
         if (max == 0 || min == 0) return 0;
 
         long result = rpMult(max, min);
+
         // negatives is 0 --> no negatives
         // negatives is 1 --> there is one negative, multiply result by -1
         // negative is 2 --> return result
-
         return negatives == 1 ? result * -1 : result;
     }
 
@@ -67,7 +66,7 @@ public class RussianPeasantMultiplication
         // s to parse
         // varname is n or m
 
-        int val = 0; // init to what?
+        int val = 0;
         try
         {
             val = Integer.parseInt(s);
